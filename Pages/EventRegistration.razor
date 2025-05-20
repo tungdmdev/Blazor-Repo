@@ -1,0 +1,38 @@
+@page "/event-registration"
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@registrationModel" OnValidSubmit="HandleRegistration">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="registrationModel.Name" />
+        <ValidationMessage For="@(() => registrationModel.Name)" />
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <InputText @bind-Value="registrationModel.Email" />
+        <ValidationMessage For="@(() => registrationModel.Email)" />
+    </div>
+
+    <button type="submit">Register</button>
+</EditForm>
+
+@code {
+    public class RegistrationModel {
+        [Required(ErrorMessage = "Name is required.")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email format.")]
+        public string Email { get; set; }
+    }
+
+    private RegistrationModel registrationModel = new();
+
+    private void HandleRegistration() {
+        Console.WriteLine($"User registered: {registrationModel.Name}, {registrationModel.Email}");
+    }
+}

@@ -1,0 +1,9 @@
+@code {
+    private List<string> attendedEvents = new();
+
+    private void MarkAttendance(string eventName) {
+        if (!attendedEvents.Contains(eventName)) {
+            attendedEvents.Add(eventName);
+        }
+    }
+}

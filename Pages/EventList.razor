@@ -1,0 +1,17 @@
+@using static BlazorPeerAsign.Pages.EventCard
+@code {
+    private List<EventModel> eventList = Enumerable.Range(1, 1000).Select(i => new EventModel {
+        Name = $"Event {i}",
+        Date = DateTime.Now.AddDays(i),
+        Location = "Hanoi, Vietnam"
+    }).ToList();
+}
+
+@foreach (var eventItem in eventList.Take(20)) // Example pagination
+{
+    <div class="event-card">
+        <h2>@eventItem.Name</h2>
+        <p>Date: @eventItem.Date.ToString("MMMM dd, yyyy")</p>
+        <p>Location: @eventItem.Location</p>
+    </div>
+}
